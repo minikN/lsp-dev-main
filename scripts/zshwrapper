@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+zsh --no-rcs --noglobal-rcs "$1" 2>&1 | awk -v p="$2" 'BEGIN{OFS=FS=":"} {$1=p}1'
