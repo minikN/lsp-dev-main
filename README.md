@@ -1,12 +1,16 @@
 # Build the container
 
+
+
 ``` sh
 cd ~/path/to/repo
 
-# PHP
-docker build -t lsp-docker-php -f dockerfiles/PHP .
-# SHELL
-docker build -t lsp-docker-shell -f dockerfiles/SHELL .
-# Dockerfile
-docker build -t lsp-docker-dockerfile -f dockerfiles/DOCKERF .
+# Needed for dockerfile lsp server
+git clone https://github.com/hadolint/hadolint
+
+# With dangling images
+docker build --tag lsp-langserver --target alpine-distro .
+
+# Without
+DOCKER_BUILDKIT=1 docker build --tag test-con --target alpine-distro .
 ```

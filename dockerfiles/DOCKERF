@@ -1,4 +1,0 @@
-FROM hadolint/hadolint:latest
-
-RUN apk add nodejs npm
-RUN npm i -g dockerfile-language-server-nodejs
