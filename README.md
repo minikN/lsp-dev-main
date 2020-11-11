@@ -13,4 +13,7 @@ docker build --tag lsp-langserver --target alpine-distro .
 
 # Without
 DOCKER_BUILDKIT=1 docker build --tag test-con --target alpine-distro .
+
+# Optionally after the build
+docker system prune
 ```
