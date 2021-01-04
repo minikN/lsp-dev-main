@@ -1,6 +1,6 @@
 FROM debian:stretch-slim AS builder
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update \
  && apt-get install --no-install-recommends -y \
@@ -30,6 +30,10 @@ RUN curl -sSL https://github.com/upx/upx/releases/download/v3.94/upx-3.94-amd64_
 
 # OUTPUT
 FROM alpine:latest AS alpine-distro
+
+# GIVE ACCESS TO HOST PROGRAMS
+ENV PATH="${PATH}:/usr/local/bin/host"
+RUN mkdir /usr/local/bin/host
 RUN apk add nodejs npm
 
 # DOCKERFILE
@@ -51,7 +55,8 @@ RUN apk add curl php7 \
     php7-xml \
     php7-xmlwriter \
     php7-tokenizer \
-    php7-fileinfo
+    php7-fileinfo \
+    php7-pdo
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN npm i -g intelephense
 RUN mkdir /root/intelephense
